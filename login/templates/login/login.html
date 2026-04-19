@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo Rev | Iniciar sesi&oacute;n</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'login/auth.css' %}">
+</head>
+<body>
+  <main class="auth-layout">
+    <aside class="brand-panel">
+      <p class="chip">Portal de fisioterapia</p>
+      <h1>Nexo Rev</h1>
+      <p class="lead">
+        Gestiona sesiones y avances de rehabilitacion en un solo lugar.
+      </p>
+
+      <ul class="benefits">
+        <li>Historial clinico y evolucion en tiempo real</li>
+        <li>Agenda de citas y seguimiento terapeutico</li>
+        <li>Acceso seguro desde cualquier dispositivo</li>
+      </ul>
+    </aside>
+
+    <section class="form-panel">
+      <div class="form-head">
+        <h2>Iniciar sesion</h2>
+        <p>Ingresa a tu cuenta para continuar.</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="field-group">
+          <label for="email">Correo electronico</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="Correo electronico"
+            required
+          >
+        </div>
+
+        <div class="field-group">
+          <label for="password">Contrase&ntilde;a</label>
+          <div class="password-wrap">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Minimo 8 caracteres"
+              required
+            >
+            <button type="button" id="togglePassword" class="ghost-btn" aria-label="Mostrar contrase&ntilde;a">
+              Ver
+            </button>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="check-wrap" for="remember">
+            <input id="remember" name="remember" type="checkbox">
+            Recordarme
+          </label>
+          <a href="#" class="text-link">Olvide mi contrase&ntilde;a</a>
+        </div>
+
+        <button type="submit" class="primary-btn">Entrar</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+
+      <p class="signup-cta">
+        &iquest;No tienes cuenta?
+        <a href="{% url 'signup' %}" class="text-link">Crear cuenta</a>
+      </p>
+    </section>
+  </main>
+
+  <script>
+    window.__NEXOREV = {
+      signupUrl: "{% url 'signup' %}",
+      homeUrl: "{% url 'formulario' %}"
+    };
+  </script>
+  <script src="{% static 'login/js/login.js' %}"></script>
+</body>
+</html>

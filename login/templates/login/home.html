@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - NexoRev</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/home.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">Nexo<span>Rev</span></a>
+        <div class="navbar-right">
+            <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Bienvenido a NexoRev</h1>
+        <p class="welcome-text">Tu plataforma integral de gestión de fisioterapia</p>
+
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>Pacientes</h3>
+                <p>Administra el historial clínico de tus pacientes</p>
+                <div class="card-value">0</div>
+                <div class="card-action">
+                    <a href="#" class="btn btn-primary">Ir a Pacientes</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Citas Programadas</h3>
+                <p>Agenda y seguimiento de sesiones terapéuticas</p>
+                <div class="card-value">0</div>
+                <div class="card-action">
+                    <a href="#" class="btn btn-primary">Ver Citas</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Reportes</h3>
+                <p>Visualiza el progreso y avances de rehabilitación</p>
+                <div class="card-value">0</div>
+                <div class="card-action">
+                    <a href="#" class="btn btn-primary">Ver Reportes</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>¿Cómo comenzar?</h2>
+            <p>
+                NexoRev te proporciona un espacio seguro y organizado para gestionar todos los aspectos de tu práctica de fisioterapia. 
+                Desde el historial clínico detallado de tus pacientes, hasta la programación inteligente de citas y el seguimiento 
+                en tiempo real del progreso terapéutico. <br><br>
+                Comienza por añadir a tus primeros pacientes y programa tus sesiones de tratamiento. 
+                Todos tus datos están seguros y accesibles desde cualquier dispositivo.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

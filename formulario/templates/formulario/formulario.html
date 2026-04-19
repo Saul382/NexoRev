@@ -1,0 +1,322 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo Rev | Formulario de Fisioterapia</title>
+  <script>
+    (() => {
+      const currentUserStorageKey = "nexorev_current_user";
+      const themePreferenceStorageKey = "nexorev_theme_preferences";
+      const fontSizePreferenceStorageKey = "nexorev_font_size_preferences";
+      const allowedFontSizes = new Set(["normal", "large", "xlarge"]);
+      const currentUser = sessionStorage.getItem(currentUserStorageKey)?.toLowerCase();
+      const getPreferenceMap = (storageKey) => {
+        try {
+          const rawValue = localStorage.getItem(storageKey);
+          const parsedValue = rawValue ? JSON.parse(rawValue) : {};
+          return parsedValue && typeof parsedValue === "object" ? parsedValue : {};
+        } catch {
+          return {};
+        }
+      };
+
+      const themePreferences = getPreferenceMap(themePreferenceStorageKey);
+      const fontSizePreferences = getPreferenceMap(fontSizePreferenceStorageKey);
+
+      const theme = currentUser && themePreferences[currentUser] === "dark" ? "dark" : "light";
+      const savedFontSize = currentUser ? fontSizePreferences[currentUser] : "normal";
+      const fontSize = allowedFontSizes.has(savedFontSize) ? savedFontSize : "normal";
+
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.setAttribute("data-font-size", fontSize);
+    })();
+  </script>
+  <link rel="stylesheet" href="{% static 'formulario/estilo.css' %}">
+</head>
+<body>
+  <main class="form-layout">
+    <header class="hero">
+      <p class="chip">Evaluacion inicial</p>
+      <h1>Formulario de ingreso para fisioterapia</h1>
+      <p>
+        Completa esta informacion para entender tu caso y preparar una atencion personalizada.
+      </p>
+    </header>
+
+    <section class="card">
+      <form id="fisioterapiaForm" novalidate>
+        <fieldset>
+          <legend>Datos personales</legend>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="nombre">Nombre completo</label>
+              <input id="nombre" name="nombre" type="text" placeholder="Ejemplo: Juan Perez" required>
+            </div>
+
+            <div class="field">
+              <label for="edad">Edad</label>
+              <input id="edad" name="edad" type="number" min="1" max="120" placeholder="Ejemplo: 32" required>
+            </div>
+          </div>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="telefono">Telefono</label>
+              <input id="telefono" name="telefono" type="tel" placeholder="Ejemplo: +502 5555 5555" required>
+            </div>
+
+            <div class="field">
+              <label for="ocupacion">Ocupacion</label>
+              <input id="ocupacion" name="ocupacion" type="text" placeholder="Ejemplo: Contador / Estudiante" required>
+            </div>
+          </div>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="genero">Genero</label>
+              <select id="genero" name="genero" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="femenino">Femenino</option>
+                <option value="masculino">Masculino</option>
+                <option value="otro">Otro</option>
+                <option value="prefiere-no-decir">Prefiero no decirlo</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="altura">Altura (cm)</label>
+              <input id="altura" name="altura" type="number" min="30" max="250" step="0.1" placeholder="Ejemplo: 170" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="pesoLibras">Peso (libras)</label>
+            <input id="pesoLibras" name="pesoLibras" type="number" min="1" max="900" step="0.1" placeholder="Ejemplo: 150" required>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Motivo de consulta</legend>
+
+          <div class="field">
+            <label for="motivo">Cual es la razon principal por la que buscas fisioterapia?</label>
+            <textarea id="motivo" name="motivo" rows="3" placeholder="Describe tu principal motivo de consulta" required></textarea>
+          </div>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="tiempoProblema">Desde cuando tienes este problema?</label>
+              <select id="tiempoProblema" name="tiempoProblema" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="menos-1-semana">Menos de 1 semana</option>
+                <option value="1-4-semanas">Entre 1 y 4 semanas</option>
+                <option value="1-3-meses">Entre 1 y 3 meses</option>
+                <option value="mas-3-meses">Mas de 3 meses</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <span class="question">Has recibido fisioterapia antes?</span>
+              <div class="choice-row">
+                <label><input type="radio" name="fisioterapiaPrevia" value="si" required> Si</label>
+                <label><input type="radio" name="fisioterapiaPrevia" value="no"> No</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dolor y movilidad</legend>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="zonaDolor">En que parte del cuerpo sientes molestias?</label>
+              <input id="zonaDolor" name="zonaDolor" type="text" placeholder="Ejemplo: espalda baja, cuello, rodilla" required>
+            </div>
+
+            <div class="field">
+              <label for="nivelDolor">Como describirias el dolor?</label>
+              <select id="nivelDolor" name="nivelDolor" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="leve">Leve</option>
+                <option value="moderado">Moderado</option>
+                <option value="intenso">Intenso</option>
+                <option value="muy-intenso">Muy intenso</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="actividadDolor">
+              Que actividades empeoran o alivian el dolor?
+            </label>
+            <textarea id="actividadDolor" name="actividadDolor" rows="3" placeholder="Ejemplo: empeora al subir escaleras, mejora con reposo" required></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Habitos y estilo de vida</legend>
+
+          <div class="field">
+            <span class="question">Practicas algun deporte o actividad fisica regularmente?</span>
+            <div class="choice-row">
+              <label><input type="radio" name="actividadFisica" value="si" required> Si</label>
+              <label><input type="radio" name="actividadFisica" value="no"> No</label>
+            </div>
+          </div>
+
+          <div class="field-grid two-col">
+            <div class="field">
+              <label for="horasPantalla">Cuantas horas al dia pasas sentado o frente a pantallas?</label>
+              <select id="horasPantalla" name="horasPantalla" required>
+                <option value="">Selecciona una opcion</option>
+                <option value="menos-3">Menos de 3 horas</option>
+                <option value="3-6">Entre 3 y 6 horas</option>
+                <option value="7-9">Entre 7 y 9 horas</option>
+                <option value="10-mas">10 horas o mas</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Antecedentes y condiciones</legend>
+
+          <div class="field">
+            <span class="question">El paciente presenta alguna discapacidad?</span>
+            <div class="choice-row">
+              <label><input type="radio" name="presentaDiscapacidad" value="si" required> Si</label>
+              <label><input type="radio" name="presentaDiscapacidad" value="no"> No</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="detalleDiscapacidad">Si la respuesta es Si, especifica cual.</label>
+            <textarea id="detalleDiscapacidad" name="detalleDiscapacidad" rows="2" placeholder="Si la respuesta es No, puedes dejar este campo en blanco."></textarea>
+          </div>
+
+          <div class="field">
+            <span class="question">Has tenido lesiones o cirugias previas?</span>
+            <div class="choice-row">
+              <label><input type="radio" name="tuvoLesionesOCirugias" value="si" required> Si</label>
+              <label><input type="radio" name="tuvoLesionesOCirugias" value="no"> No</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="lesionesPrevias">Detalle de lesiones o cirugias previas</label>
+            <textarea id="lesionesPrevias" name="lesionesPrevias" rows="2" placeholder="Si tu respuesta es No, puedes dejar este campo en blanco."></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="primary-btn">Enviar formulario</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("fisioterapiaForm");
+    const formMessage = document.getElementById("formMessage");
+    const detalleDiscapacidad = document.getElementById("detalleDiscapacidad");
+    const lesionesPrevias = document.getElementById("lesionesPrevias");
+    const discapacidadRadios = form.querySelectorAll('input[name="presentaDiscapacidad"]');
+    const lesionesRadios = form.querySelectorAll('input[name="tuvoLesionesOCirugias"]');
+    const formStatusStorageKey = "nexorev_form_status";
+    const userProfilesStorageKey = "nexorev_user_profiles";
+    const currentUserStorageKey = "nexorev_current_user";
+    const redirectToPrincipal = "../principal/principal.html";
+    const redirectDelayMs = 700;
+    let redirectTimer;
+
+    const getFormStatusMap = () => {
+      try {
+        const rawValue = localStorage.getItem(formStatusStorageKey);
+        const parsedValue = rawValue ? JSON.parse(rawValue) : {};
+        return parsedValue && typeof parsedValue === "object" ? parsedValue : {};
+      } catch {
+        return {};
+      }
+    };
+
+    const saveFormStatusMap = (formStatusMap) => {
+      localStorage.setItem(formStatusStorageKey, JSON.stringify(formStatusMap));
+    };
+
+    const getUserProfileMap = () => {
+      try {
+        const rawValue = localStorage.getItem(userProfilesStorageKey);
+        const parsedValue = rawValue ? JSON.parse(rawValue) : {};
+        return parsedValue && typeof parsedValue === "object" ? parsedValue : {};
+      } catch {
+        return {};
+      }
+    };
+
+    const saveUserProfileMap = (userProfileMap) => {
+      localStorage.setItem(userProfilesStorageKey, JSON.stringify(userProfileMap));
+    };
+
+    const actualizarCamposCondicionales = () => {
+      const respuestaDiscapacidad = form.querySelector('input[name="presentaDiscapacidad"]:checked')?.value;
+      const respuestaLesiones = form.querySelector('input[name="tuvoLesionesOCirugias"]:checked')?.value;
+
+      detalleDiscapacidad.required = respuestaDiscapacidad === "si";
+      lesionesPrevias.required = respuestaLesiones === "si";
+    };
+
+    const currentUser = sessionStorage.getItem(currentUserStorageKey)?.toLowerCase();
+    const formStatusMap = getFormStatusMap();
+    if (currentUser && formStatusMap[currentUser]) {
+      window.location.replace(redirectToPrincipal);
+    }
+
+    discapacidadRadios.forEach((radio) => {
+      radio.addEventListener("change", actualizarCamposCondicionales);
+    });
+
+    lesionesRadios.forEach((radio) => {
+      radio.addEventListener("change", actualizarCamposCondicionales);
+    });
+
+    actualizarCamposCondicionales();
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      clearTimeout(redirectTimer);
+      actualizarCamposCondicionales();
+
+      if (!form.checkValidity()) {
+        formMessage.textContent = "Completa todos los campos requeridos antes de enviar.";
+        formMessage.className = "form-message error";
+        form.reportValidity();
+        return;
+      }
+
+      const loggedUser = sessionStorage.getItem(currentUserStorageKey)?.toLowerCase();
+      if (loggedUser) {
+        const submittedProfile = Object.fromEntries(new FormData(form).entries());
+        submittedProfile.email = loggedUser;
+
+        const updatedUserProfileMap = getUserProfileMap();
+        updatedUserProfileMap[loggedUser] = submittedProfile;
+        saveUserProfileMap(updatedUserProfileMap);
+
+        const updatedFormStatusMap = getFormStatusMap();
+        updatedFormStatusMap[loggedUser] = true;
+        saveFormStatusMap(updatedFormStatusMap);
+      }
+
+      formMessage.textContent = "Formulario enviado correctamente. Redirigiendo a la pagina principal...";
+      formMessage.className = "form-message success";
+
+      redirectTimer = setTimeout(() => {
+        window.location.href = redirectToPrincipal;
+      }, redirectDelayMs);
+    });
+  </script>
+</body>
+</html>

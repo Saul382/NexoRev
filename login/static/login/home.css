@@ -1,0 +1,262 @@
+/* ============================================
+   NexoRev - Estilos de Home
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --ink-dark: #1d2418;
+    --green-muted: #4f5a44;
+    --green-light: #c4ceb5;
+    --accent-gold: #b89235;
+    --accent-gold-strong: #8b6914;
+    --teal-success: #3f5f33;
+    --danger-red: #d32f2f;
+    --white: #ffffff;
+    --gray-light: #e8e8e8;
+    --gray-bg: #f5f5f5;
+}
+
+body {
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    background: var(--gray-bg);
+    color: var(--ink-dark);
+}
+
+/* ============================================
+   Navbar
+   ============================================ */
+
+.navbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-light);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink-dark);
+    text-decoration: none;
+}
+
+.navbar-brand span {
+    color: var(--accent-gold);
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logout-btn {
+    background: var(--accent-gold);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: var(--accent-gold-strong);
+}
+
+/* ============================================
+   Contenedor Principal
+   ============================================ */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink-dark);
+}
+
+.welcome-text {
+    font-size: 16px;
+    color: var(--green-muted);
+    margin-bottom: 40px;
+}
+
+/* ============================================
+   Grid de Dashboard
+   ============================================ */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid var(--accent-gold);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 18px;
+    color: var(--ink-dark);
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 14px;
+    color: var(--green-muted);
+    line-height: 1.6;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-gold);
+    margin-top: 16px;
+}
+
+.card-action {
+    margin-top: 16px;
+}
+
+/* ============================================
+   Botones
+   ============================================ */
+
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent-gold);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--accent-gold-strong);
+}
+
+.btn-secondary {
+    background: var(--gray-bg);
+    color: var(--ink-dark);
+    border: 1px solid var(--gray-light);
+}
+
+.btn-secondary:hover {
+    background: var(--gray-light);
+}
+
+.btn-success {
+    background: var(--teal-success);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background: #2d4a24;
+}
+
+/* ============================================
+   Sección de Información
+   ============================================ */
+
+.info-section {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 30px;
+    border-top: 3px solid var(--teal-success);
+}
+
+.info-section h2 {
+    font-family: 'Fraunces', 'Georgia', serif;
+    font-size: 20px;
+    color: var(--ink-dark);
+    margin-bottom: 16px;
+}
+
+.info-section p {
+    font-size: 14px;
+    color: var(--green-muted);
+    line-height: 1.8;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Animaciones
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.6s ease-out;
+}
